@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+
+  postgresql:
+    container_name: bingo-postgresql
+    build:
+      context: postgresql
+    ports:
+      - "${BINGO_POSTGRESQL_PORT:-5432}:5432"
+    environment:
+      - ACCEPT_EULA=Y
+      - POSTGRES_PASSWORD=123456

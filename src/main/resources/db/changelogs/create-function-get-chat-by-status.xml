@@ -1,0 +1,53 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet author="Sherif Huseynli" id="2023_07-003">
+        <sql dbms="postgresql">
+            CREATE OR REPLACE FUNCTION bingo.get_tournaments_by_status(ch_status integer, new_status_ integer, limit_ integer)
+            RETURNS TABLE(r_id int8)
+            LANGUAGE plpgsql
+            as '
+            declare
+              var_r record;
+
+            begin for var_r in( with updated as(
+            update
+              bingo."tournaments"
+            set
+              status = new_status_, update_date = current_timestamp
+            where
+              id in (
+              select
+                SS.id_
+              from
+                (
+                select
+                  tt.id as id_
+                from
+                  bingo."tournaments" as tt
+                where
+                  tt.status = ch_status
+                order by
+                  tt.id) as SS
+              limit limit_) returning id)
+            select
+              updated.id as id
+            from
+              updated) loop r_id := var_r.id;
+            insert
+              into
+              bingo."tournament_dispatch_log" (tournament_id, pick_status, new_status)
+            values (var_r.id, ch_status, new_status_);
+
+            return next;
+            --commit;
+            end loop;
+            end;
+            '
+            ;
+
+        </sql>
+    </changeSet>
+</databaseChangeLog>

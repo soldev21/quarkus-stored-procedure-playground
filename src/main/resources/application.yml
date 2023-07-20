@@ -1,0 +1,14 @@
+quarkus:
+  datasource:
+    db-kind: postgresql
+    username: bingouser
+    password: 123456
+    jdbc:
+      url: jdbc:postgresql://localhost:5432/bingo
+  liquibase:
+    change-log: db/changeLog.xml
+    default-schema-name: bingo
+    migrate-at-start: true
+    clean-at-start: false
+  scheduler:
+    enabled: true
