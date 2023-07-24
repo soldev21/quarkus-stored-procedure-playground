@@ -6,8 +6,14 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 
 ## Start local DB instance
 ```shell script
-docker-compose -f ./infrastructure/db-docker/docker-compose.yml rm -s -f
-docker-compose -f ./infrastructure/db-docker/docker-compose.yml up --build -d
+docker-compose -f ./infrastructure/postgres/docker-compose.yml rm -s -f
+docker-compose -f ./infrastructure/postgres/docker-compose.yml up --build -d
+``` 
+
+## Start local Otel instance
+```shell script
+docker-compose -f ./infrastructure/otel/docker-compose.yml rm -s -f
+docker-compose -f ./infrastructure/otel/docker-compose.yml up --build -d
 ``` 
 
 

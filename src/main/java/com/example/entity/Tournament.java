@@ -25,7 +25,9 @@ public class Tournament {
 
     @Id
     Long id;
+    @Column(name = "creation_time")
     Date creationTime;
+    @Column(name = "update_date")
     Date updateDate;
     Integer status;
 }

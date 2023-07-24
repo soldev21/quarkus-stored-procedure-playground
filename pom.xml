@@ -70,6 +70,42 @@
       <artifactId>quarkus-junit5</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-opentelemetry</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.opentelemetry.instrumentation</groupId>
+      <artifactId>opentelemetry-jdbc</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-narayana-jta</artifactId>
+    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>io.quarkus</groupId>-->
+<!--      <artifactId>quarkus-micrometer-registry-prometheus</artifactId>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>io.quarkiverse.micrometer.registry</groupId>-->
+<!--      <artifactId>quarkus-micrometer-registry-jmx</artifactId>-->
+<!--      <version>3.0.0</version>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>io.github.mweirauch</groupId>-->
+<!--      <artifactId>micrometer-jvm-extras</artifactId>-->
+<!--      <version>0.2.2</version>-->
+<!--      <exclusions>-->
+<!--        <exclusion>-->
+<!--          <groupId>io.micrometer</groupId>-->
+<!--          <artifactId>micrometer-core</artifactId>-->
+<!--        </exclusion>-->
+<!--        <exclusion>-->
+<!--          <groupId>org.slf4j</groupId>-->
+<!--          <artifactId>slf4j-api</artifactId>-->
+<!--        </exclusion>-->
+<!--      </exclusions>-->
+<!--    </dependency>-->
   </dependencies>
   <build>
     <plugins>

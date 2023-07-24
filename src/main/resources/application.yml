@@ -1,10 +1,16 @@
 quarkus:
+  application:
+    name: function-playground
   datasource:
+    metrics:
+      enabled: true
     db-kind: postgresql
     username: bingouser
     password: 123456
     jdbc:
       url: jdbc:postgresql://localhost:5432/bingo
+      enable-metrics: true
+      telemetry: true
   liquibase:
     change-log: db/changeLog.xml
     default-schema-name: bingo
@@ -12,3 +18,25 @@ quarkus:
     clean-at-start: false
   scheduler:
     enabled: true
+  micrometer:
+     registry-enabled-default: true
+     binder-enabled-default: true
+  otel:
+    enabled: true
+    exporter:
+      otlp:
+        traces:
+          endpoint: "http://localhost:4317"
+          headers: "Authorization=Bearer my_secret"
+    resource:
+      attributes: "instId=${quarkus.uuid}"
+  index-dependency:
+    hibernate-core:
+      group-id: org.hibernate.orm
+      artifact-id: hibernate-core
+  log:
+    min-level: TRACE
+    console:
+      format: "%d{HH:mm:ss} %-5p traceId=%X{traceId}, parentId=%X{parentId}, spanId=%X{spanId}, sampled=%X{sampled} [%c{2.}] (%t) %s%e%n"
+  hibernate-orm:
+    physical_naming_strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
