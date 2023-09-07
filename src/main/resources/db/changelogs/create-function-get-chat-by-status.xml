@@ -30,7 +30,7 @@
                 where
                   tt.status = ch_status
                 order by
-                  tt.id) as SS
+                  tt.id FOR UPDATE SKIP LOCKED) as SS
               limit limit_) returning id)
             select
               updated.id as id

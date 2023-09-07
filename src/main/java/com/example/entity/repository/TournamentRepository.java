@@ -7,7 +7,7 @@ import io.quarkus.narayana.jta.TransactionExceptionResult;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
-import org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy;
+import jakarta.transaction.Transactional;
 
 import java.util.List;
 
@@ -17,8 +17,9 @@ public class TournamentRepository implements PanacheRepository<Tournament> {
     @Inject
     EntityManager entityManager;
 
+    @Transactional
     public List<Long> getActiveTournaments(int curStatus, int newStatus, int limit) {
-        return (List<Long>) QuarkusTransaction.requiringNew()
+        return (List<Long>) QuarkusTransaction.joiningExisting()
             .timeout(100)
             .exceptionHandler(throwable -> TransactionExceptionResult.ROLLBACK)
             .call(() -> entityManager.createNamedStoredProcedureQuery("findActiveTournaments")

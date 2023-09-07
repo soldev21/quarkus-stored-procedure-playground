@@ -7,7 +7,7 @@ services:
     build:
       context: postgresql
     ports:
-      - "${BINGO_POSTGRESQL_PORT:-5432}:5432"
+      - "${BINGO_POSTGRESQL_PORT:-5433}:5432"
     environment:
       - ACCEPT_EULA=Y
       - POSTGRES_PASSWORD=123456

@@ -8,7 +8,7 @@ quarkus:
     username: bingouser
     password: 123456
     jdbc:
-      url: jdbc:postgresql://localhost:5432/bingo
+      url: jdbc:postgresql://localhost:5433/bingo
       enable-metrics: true
       telemetry: true
   liquibase:
@@ -19,8 +19,8 @@ quarkus:
   scheduler:
     enabled: true
   micrometer:
-     registry-enabled-default: true
-     binder-enabled-default: true
+    registry-enabled-default: true
+    binder-enabled-default: true
   otel:
     enabled: true
     exporter:
@@ -40,3 +40,5 @@ quarkus:
       format: "%d{HH:mm:ss} %-5p traceId=%X{traceId}, parentId=%X{parentId}, spanId=%X{spanId}, sampled=%X{sampled} [%c{2.}] (%t) %s%e%n"
   hibernate-orm:
     physical_naming_strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+#    database:
+#      generation: update
