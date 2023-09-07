@@ -35,9 +35,19 @@ quarkus:
       group-id: org.hibernate.orm
       artifact-id: hibernate-core
   log:
+    category:
+      "org.jboss.resteasy.reactive.client.logging":
+        level: DEBUG
+      "org.jboss.resteasy.reactive.common.core.AbstractResteasyReactiveContext":
+        level: DEBUG
+      "org.jboss.resteasy.reactive.server.handlers.ParameterHandler":
+        level: DEBUG
     min-level: TRACE
     console:
+      async: false
       format: "%d{HH:mm:ss} %-5p traceId=%X{traceId}, parentId=%X{parentId}, spanId=%X{spanId}, sampled=%X{sampled} [%c{2.}] (%t) %s%e%n"
+    file:
+      async: false
   hibernate-orm:
     physical_naming_strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
 #    database:

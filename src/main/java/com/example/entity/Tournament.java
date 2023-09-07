@@ -24,6 +24,8 @@ import java.util.Date;
 public class Tournament {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tr_seq")
+    @SequenceGenerator(name = "tr_seq" ,sequenceName = "tournaments_id_seq", allocationSize = 1, schema = "bingo")
     Long id;
     @Column(name = "creation_time")
     Date creationTime;
